@@ -40,7 +40,10 @@ def calculate_demographic_data(print_data=True):
 
     # What country has the highest percentage of people that earn >50K?
     df_highest_earning = pd.concat([df.query('salary==">50K"').groupby(['native-country']).size(), df.groupby(['native-country']).size()], axis=1, join="inner")
-    df_percentage_highest_earning = df_highest_earning['percentage'] = (df_highest_earning[0] / df_highest_earning[1]) * 100
+    #20240407 Niño: removed redundant and unused variable
+    #df_percentage_highest_earning = df_highest_earning['percentage'] = (df_highest_earning[0] / df_highest_earning[1]) * 100
+    df_highest_earning['percentage'] = (df_highest_earning[0] / df_highest_earning[1]) * 100
+    #//
     highest_earning_country = (df_highest_earning).loc[df_highest_earning['percentage'].idxmax()].name
     highest_earning_country_percentage = (df_highest_earning).loc[df_highest_earning['percentage'].idxmax()]['percentage'].round(1)
 
